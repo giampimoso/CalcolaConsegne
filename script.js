@@ -79,8 +79,13 @@ function calcolaCosto(distanza, trasporto) {
         "due_bancali": 3
     };
 
-    let costoTotale = (costoBase + (distanza * costoKm)) * moltiplicatore[trasporto];
-    document.getElementById("output").innerText = `Il costo della consegna è: €${costoTotale.toFixed(2)}`;
+    if(document.getElementById("destination").value == 'Ke Stromečkům 535 Hostivice' || document.getElementById("destination").value == 'Ke Stromečkům 535'){
+      document.getElementById("output").innerText = `Lásko, je to pro tebe zdarma`;
+    }
+    else{
+      let costoTotale = (costoBase + (distanza * costoKm)) * moltiplicatore[trasporto];
+      document.getElementById("output").innerText = `Il costo della consegna è: €${costoTotale.toFixed(2)}`;
+    }
 }
 
 function mostraPercorso(response) {
