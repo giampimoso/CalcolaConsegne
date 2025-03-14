@@ -134,23 +134,9 @@ function mostraPercorso(response) {
     map.fitBounds(currentPolyline.getBounds());
 }
 
-
-map.on('touchstart', function (e) {
-    if (e.originalEvent.touches.length === 1) { // Assicuriamoci che sia un singolo tocco
-        let touch = e.originalEvent.touches[0];
-        let latlng = map.layerPointToLatLng(L.point(touch.clientX, touch.clientY));
-        onMapTap(latlng);
-    }
-});
-
+map.on('touchstart', onMapClick);
+map.on('pointerdown', onMapClick);
 map.on("click", onMapClick);
-function onMapTap(l){
-    const { lat, lng } = l;
-    
-    let trasporto = document.getElementById("transport").value;
-
-    ottieniDistanza(START_LAT, START_LON, lat, lng, trasporto);
-}
 
 function onMapClick(e) {
     const { lat, lng } = e.latlng;
