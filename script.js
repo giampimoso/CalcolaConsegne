@@ -135,10 +135,12 @@ function mostraPercorso(response) {
     map.fitBounds(currentPolyline.getBounds());
 }
 
-map.on("click", function(e) {
+map.on("click", onMapClick);
+map.on("tap", onMapClick);
+function onMapClick(e) {
     const { lat, lng } = e.latlng;
 
     let trasporto = document.getElementById("transport").value;
 
     ottieniDistanza(START_LAT, START_LON, lat, lng, trasporto);
-});
+}
