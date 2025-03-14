@@ -9,18 +9,18 @@
     <script src="lib/leaflet.js"></script>
 </head>
 <body>
-  <div id="map" style="height: 500px; width: 80%; margin: 20px;"></div>
+  <div id="map" style="height: 500px; width: 80%; margin: 30px;"></div>
 
     <div class="container">
-        <img src="LogoDef.png" height="100px">
+      <img src="LogoDef.png" height="100px">
         <h2>Calcolatore di Consegne</h2>
         <label for="destination">Indirizzo di Destinazione:</label>
         <input style="width: 90%" type="text" id="destination" placeholder="Inserisci l'indirizzo">
 
         <label for="transport">Tipo di Trasporto:</label>
         <select id="transport">
+            <option value="solo viaggio">Solo viaggio</option>
             <option value="elettrodomestici">Elettrodomestici</option>
-            <option value="piccolo">Piccolo</option>
             <option value="bancale">Bancale</option>
             <option value="due_bancali">Due Bancali</option>
         </select>
