@@ -3,7 +3,7 @@ const START_LAT = 46.118554;
 const START_LON = 8.286626;
 let currentPolyline = 0
 
-const map = L.map('map').setView([START_LAT, START_LON], 13); // Setta la vista iniziale della mappa (partenza dal negozio)
+const map = L.map('map',{ tap: false }).setView([START_LAT, START_LON], 13); // Setta la vista iniziale della mappa (partenza dal negozio)
 // Aggiungi le tile della mappa (usiamo OpenStreetMap come esempio)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
@@ -135,15 +135,23 @@ function mostraPercorso(response) {
 }
 
 
-$.Finger = {
-    pressDuration: 300,
-    doubleTapInterval: 300,
-    flickDuration: 150,
-    motionThreshold: 5
-};
+map.on('touchstart', function (e) {
+    if (e.originalEvent.touches.length === 1) { // Assicuriamoci che sia un singolo tocco
+        let touch = e.originalEvent.touches[0];
+        let latlng = map.layerPointToLatLng(L.point(touch.clientX, touch.clientY));
+        onMapTap(latlng);
+    }
+});
 
 map.on("click", onMapClick);
-map.on("tap", onMapClick);
+function onMapTap(l){
+    const { lat, lng } = l;
+    
+    let trasporto = document.getElementById("transport").value;
+
+    ottieniDistanza(START_LAT, START_LON, lat, lng, trasporto);
+}
+
 function onMapClick(e) {
     const { lat, lng } = e.latlng;
 
