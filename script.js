@@ -134,3 +134,11 @@ function mostraPercorso(response) {
     // Centra la mappa sul percorso
     map.fitBounds(currentPolyline.getBounds());
 }
+
+map.on("click", function(e) {
+    const { lat, lng } = e.latlng;
+
+    let trasporto = document.getElementById("transport").value;
+
+    ottieniDistanza(START_LAT, START_LON, lat, lng, trasporto);
+});
