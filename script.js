@@ -134,17 +134,13 @@ function mostraPercorso(response) {
     map.fitBounds(currentPolyline.getBounds());
 }
 
-let tapTimeout;
-map.on('touchstart', function (e) {
-    tapTimeout = setTimeout(() => {
-        console.log("Touch lungo registrato:", e.latlng);
-        onMapClick;
-    }, 200); // Aspetta 200ms per distinguere uno scroll da un tap
-});
 
-map.on('touchend', function () {
-    clearTimeout(tapTimeout);
-});
+$.Finger = {
+    pressDuration: 300,
+    doubleTapInterval: 300,
+    flickDuration: 150,
+    motionThreshold: 5
+};
 
 map.on("click", onMapClick);
 map.on("tap", onMapClick);
