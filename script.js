@@ -3,8 +3,7 @@ const START_LAT = 46.118554;
 const START_LON = 8.286626;
 let currentPolyline = 0
 
-const map = L.map('map').setView([START_LAT, START_LON], 13); // Setta la vista iniziale della mappa (partenza dal negozio)
-
+const map = L.map('map',{ tap: true }).setView([START_LAT, START_LON], 13); // Setta la vista iniziale della mappa (partenza dal negozio)
 // Aggiungi le tile della mappa (usiamo OpenStreetMap come esempio)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
