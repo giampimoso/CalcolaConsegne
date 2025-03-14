@@ -10,6 +10,18 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+function arrotonda5(x){
+  x=parseInt(x);
+  let diff=x%5;
+  if(diff){
+    if(diff<3)
+      return x-diff;
+    else
+      return x+(5-diff);
+  }
+  else return x
+}
+
 function calcolaPrezzo() {
     let destinazione = document.getElementById("destination").value;
     let trasporto = document.getElementById("transport").value;
@@ -70,21 +82,37 @@ function ottieniDistanza(lat1, lon1, lat2, lon2, trasporto) {
 
 
 function calcolaCosto(distanza, trasporto) {
-    const costoBase = 5; // Base fissa
-    const costoKm = 0.50; // Costo per km
+    const costoKm = 0.45; // Costo per km
+
+    const costoMin = {
+      "elettrodomestici": 20,
+      "solo viaggio": 0,
+      "bancale": 20,
+      "due_bancali": 30
+    };
+
     const moltiplicatore = {
         "elettrodomestici": 1.5,
-        "piccolo": 1,
+        "solo viaggio": 1,
         "bancale": 2,
         "due_bancali": 3
     };
+
+    const costoBase = {
+      "elettrodomestici": 15,
+      "solo viaggio": 5,
+      "bancale": 10,
+      "due_bancali": 15
+    };
+
 
     if(document.getElementById("destination").value == 'Ke Stromečkům 535 Hostivice' || document.getElementById("destination").value == 'Ke Stromečkům 535'){
       document.getElementById("output").innerText = `Lásko, je to pro tebe zdarma`;
     }
     else{
-      let costoTotale = (costoBase + (distanza * costoKm)) * moltiplicatore[trasporto];
-      document.getElementById("output").innerText = `Il costo della consegna è: €${costoTotale.toFixed(2)}`;
+      let costoTotale = costoBase[trasporto] + ((distanza * costoKm) * moltiplicatore[trasporto]);
+      if(costoTotale < costoMin[trasporto]){ costoTotale=costoMin[trasporto];}
+      document.getElementById("output").innerText = `Il costo della consegna è: €${arrotonda5(costoTotale.toFixed(2))}`;
     }
 }
 
