@@ -3,7 +3,7 @@ const START_LAT = 46.118554;
 const START_LON = 8.286626;
 let currentPolyline = 0
 
-const map = L.map('map',{ tap: false }).setView([START_LAT, START_LON], 13); // Setta la vista iniziale della mappa (partenza dal negozio)
+const map = L.map('map').setView([START_LAT, START_LON], 13); // Setta la vista iniziale della mappa (partenza dal negozio)
 // Aggiungi le tile della mappa (usiamo OpenStreetMap come esempio)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
@@ -133,6 +133,18 @@ function mostraPercorso(response) {
     // Centra la mappa sul percorso
     map.fitBounds(currentPolyline.getBounds());
 }
+
+let tapTimeout;
+map.on('touchstart', function (e) {
+    tapTimeout = setTimeout(() => {
+        console.log("Touch lungo registrato:", e.latlng);
+        onMapClick;
+    }, 200); // Aspetta 200ms per distinguere uno scroll da un tap
+});
+
+map.on('touchend', function () {
+    clearTimeout(tapTimeout);
+});
 
 map.on("click", onMapClick);
 map.on("tap", onMapClick);
