@@ -134,8 +134,7 @@ function mostraPercorso(response) {
     map.fitBounds(currentPolyline.getBounds());
 }
 
-map.on('touchstart', onMapClick);
-map.on('pointerdown', onMapClick);
+map.on('dblclick', onMapClick);
 map.on("click", onMapClick);
 
 function onMapClick(e) {
