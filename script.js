@@ -13,7 +13,7 @@ function arrotonda5(x){
   x=parseInt(x);
   let diff=x%5;
   if(diff){
-    if(diff<3)
+    if(diff<1)
       return x-diff;
     else
       return x+(5-diff);
@@ -84,21 +84,21 @@ function calcolaCosto(distanza, trasporto) {
     const costoKm = 0.45; // Costo per km
 
     const costoMin = {
-      "elettrodomestici": 25,
+      "elettrodomestici": 30,
       "solo viaggio": 0,
       "bancale": 20,
       "due_bancali": 25
     };
 
     const moltiplicatore = {
-        "elettrodomestici": 1.7,
+        "elettrodomestici": 2,
         "solo viaggio": 1,
-        "bancale": 2,
+        "bancale": 2.5,
         "due_bancali": 3
     };
 
     const costoBase = {
-      "elettrodomestici": 20,
+      "elettrodomestici": 25,
       "solo viaggio": 5,
       "bancale": 10,
       "due_bancali": 15
