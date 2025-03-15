@@ -84,21 +84,21 @@ function calcolaCosto(distanza, trasporto) {
     const costoKm = 0.45; // Costo per km
 
     const costoMin = {
-      "elettrodomestici": 20,
+      "elettrodomestici": 25,
       "solo viaggio": 0,
       "bancale": 20,
-      "due_bancali": 30
+      "due_bancali": 25
     };
 
     const moltiplicatore = {
-        "elettrodomestici": 1.5,
+        "elettrodomestici": 1.7,
         "solo viaggio": 1,
         "bancale": 2,
         "due_bancali": 3
     };
 
     const costoBase = {
-      "elettrodomestici": 15,
+      "elettrodomestici": 20,
       "solo viaggio": 5,
       "bancale": 10,
       "due_bancali": 15
